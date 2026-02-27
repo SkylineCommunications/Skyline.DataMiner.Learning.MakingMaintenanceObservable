@@ -10,78 +10,55 @@ namespace DeviceMaintenanceApi.Data
 		{
 			return new List<Device>
 			{
-			new Device
-			{
-				Id = new Guid("e1e27b6b-3f76-4074-a846-cf745639b57d"),
-				Name = "Encoder A1",
-				Description = "Primary H.264 encoder for Channel 1.",
-			},
+				new Device
+				{
+					Id = new Guid("e1e27b6b-3f76-4074-a846-cf745639b57d"),
+					Name = "Encoder A1",
+					Description = "Primary H.264 encoder for Channel 1.",
+				},
 
-			new Device
-			{
-				Id = new Guid("35f57eca-4c16-4dac-88f6-7721bd8f781b"),
-				Name = "Encoder B2",
-				Description = "Backup encoder for Channel 1.",
-			},
+				new Device
+				{
+					Id = new Guid("35f57eca-4c16-4dac-88f6-7721bd8f781b"),
+					Name = "Encoder B2",
+					Description = "Backup encoder for Channel 1.",
+				},
 
-			new Device
-			{
-				Id = new Guid("102840bd-0787-48cf-85d0-affbec2f19e5"),
-				Name = "IRD RX-10",
-				Description = "Integrated Receiver/Decoder for satellite feed.",
-			},
+				new Device
+				{
+					Id = new Guid("102840bd-0787-48cf-85d0-affbec2f19e5"),
+					Name = "IRD RX-10",
+					Description = "Integrated Receiver/Decoder for satellite feed.",
+				},
 
-            // todo add more devices and maintenance windows for testing
-            //new Device
-            //{
-            //    Id = 4,
-            //    Name = "Modulator MUX-300",
-            //    Description = "Main DVB-T modulator.",
-            //    MaintenanceWindows = new List<MaintenanceWindow>
-            //    {
-            //        new MaintenanceWindow { Id=401, DeviceId=4, Start=new DateTime(2022, 12, 21, 03,00,00), End=new DateTime(2022,12,21,03,45,00), Type="firmware update", Impact="normal" },
-            //        new MaintenanceWindow { Id=402, DeviceId=4, Start=new DateTime(2025, 06, 29, 05,00,00), End=new DateTime(2025,06,29,05,40,00), Type="hardware", Impact="high" },
-            //        new MaintenanceWindow { Id=403, DeviceId=4, Start=new DateTime(2026, 03, 10, 04,00,00), End=new DateTime(2026,03,10,04,20,00), Type="testing", Impact="low" }
-            //    }
-            //},
+				new Device
+				{
+					Id = new Guid("0cc7c4b2-0cd6-4872-9cda-4e911d817916"),
+					Name = "Modulator MUX-300",
+					Description = "Main DVB-T modulator.",
+				},
 
-            //new Device
-            //{
-            //    Id = 5,
-            //    Name = "Multiplexer MPX-500",
-            //    Description = "Transport stream multiplexer.",
-            //    MaintenanceWindows = new List<MaintenanceWindow>
-            //    {
-            //        new MaintenanceWindow { Id=501, DeviceId=5, Start=new DateTime(2024, 03, 03, 02,00,00), End=new DateTime(2024,03,03,02,45,00), Type="other", Impact="normal" },
-            //        new MaintenanceWindow { Id=502, DeviceId=5, Start=new DateTime(2025, 09, 14, 01,00,00), End=new DateTime(2025,09,14,01,30,00), Type="hardware", Impact="high" }
-            //    }
-            //},
+				new Device
+				{
+					Id = new Guid("511d8801-f143-48d4-9ac3-c569cafa7aad"),
+					Name = "Multiplexer MPX-500",
+					Description = "Transport stream multiplexer.",
+				},
 
-            //new Device
-            //{
-            //    Id = 6,
-            //    Name = "Contribution Link Encoder C-100",
-            //    Description = "Encoder used for remote live contribution feeds.",
-            //    MaintenanceWindows = new List<MaintenanceWindow>
-            //    {
-            //        new MaintenanceWindow { Id=601, DeviceId=6, Start=new DateTime(2023, 05, 27, 04,00,00), End=new DateTime(2023,05,27,04,30,00), Type="testing", Impact="low" },
-            //        new MaintenanceWindow { Id=602, DeviceId=6, Start=new DateTime(2026, 02, 25, 02,00,00), End=new DateTime(2026,02,25,02,20,00), Type="firmware update", Impact="normal" }
-            //    }
-            //},
+				new Device
+				{
+					Id = new Guid("823285ac-70e4-4dc4-a60f-1b4fabf1ffae"),
+					Name = "Contribution Link Encoder C-100",
+					Description = "Encoder used for remote live contribution feeds.",
+				},
 
-            //new Device
-            //{
-            //    Id = 7,
-            //    Name = "SPTS Processor SP-44",
-            //    Description = "Single Program Transport Stream processor.",
-            //    MaintenanceWindows = new List<MaintenanceWindow>
-            //    {
-            //        new MaintenanceWindow { Id=701, DeviceId=7, Start=new DateTime(2024, 08, 20, 01,00,00), End=new DateTime(2024,08,20,01,20,00), Type="other", Impact="low" },
-            //        new MaintenanceWindow { Id=702, DeviceId=7, Start=new DateTime(2025, 12, 10, 05,00,00), End=new DateTime(2025,12,10,05,40,00), Type="hardware", Impact="high" },
-            //        new MaintenanceWindow { Id=703, DeviceId=7, Start=new DateTime(2026, 03, 05, 03,00,00), End=new DateTime(2026,03,05,03,15,00), Type="testing", Impact="normal" }
-            //    }
-            //}
-            };
+				new Device
+				{
+					Id = new Guid("253ea25e-f86a-4616-a4c2-72c5138eb5c0"),
+					Name = "SPTS Processor SP-44",
+					Description = "Single Program Transport Stream processor.",
+				},
+			};
 		}
 
 		public static List<MaintenanceWindow> GetMaintenanceWindows()

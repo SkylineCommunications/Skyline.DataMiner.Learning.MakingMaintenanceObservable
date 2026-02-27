@@ -6,7 +6,7 @@
 	<Author>PVP</Author>
 	<CheckSets>FALSE</CheckSets>
 	<Folder></Folder>
-	<Interactivity>Auto</Interactivity>
+	<Interactivity>Always</Interactivity>
 
 	<Protocols>
 	</Protocols>

@@ -81,21 +81,21 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 
 		private void AddMaintenanceWindow()
 		{
-			engine.GenerateInformation("Add");
+			engine.Log("Add Maintenance Window");
 
 			// TODO: show dialog to create MaintenanceWindow
 		}
 
 		private void EditMaintenanceWindow(MaintenanceWindow maintenanceWindow)
 		{
-			engine.GenerateInformation($"Edit {maintenanceWindow}");
+			engine.Log($"Edit {maintenanceWindow}");
 
 			// TODO: show dialog to edit MaintenanceWindow
 		}
 
 		private void DeleteMaintenanceWindow(MaintenanceWindow maintenanceWindow)
 		{
-			engine.GenerateInformation($"Delete {maintenanceWindow}");
+			engine.Log($"Delete {maintenanceWindow}");
 
 			// TODO: show dialog to delete MaintenanceWindow
 		}

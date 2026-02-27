@@ -68,9 +68,6 @@
 
 			var windows = repository.GetMaintenanceByDevice(selectDeviceSection.SelectedDevice.Id).ToList();
 
-			// todo
-			Engine.GenerateInformation($"Load device {selectDeviceSection.SelectedDevice?.Name} / {string.Join(",", windows.Select(x => x.Description))}");
-
 			maintenanceOverviewSection.Load(windows);
 			BuildDialog();
 		}
