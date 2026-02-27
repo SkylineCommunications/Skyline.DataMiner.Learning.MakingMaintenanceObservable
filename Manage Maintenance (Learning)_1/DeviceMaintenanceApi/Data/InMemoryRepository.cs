@@ -1,0 +1,188 @@
+using System;
+
+namespace DeviceMaintenanceApi.Data
+{
+	using System.Collections.Generic;
+	using System.Linq;
+	using Models;
+
+	public class InMemoryRepository : IRepository
+	{
+		private readonly List<Device> _devices;
+		private readonly List<MaintenanceWindow> _maintenanceWindows;
+
+		public InMemoryRepository()
+		{
+			_devices = DemoSeedData.GetDevices();
+			_maintenanceWindows = DemoSeedData.GetMaintenanceWindows();
+		}
+
+		public static Device CloneDevice(Device device)
+		{
+			return new Device
+			{
+				Id = device.Id,
+				Name = device.Name,
+				Description = device.Description,
+			};
+		}
+
+		public static MaintenanceWindow CloneMaintenanceWindow(MaintenanceWindow maintenanceWindow)
+		{
+			return new MaintenanceWindow
+			{
+				Id = maintenanceWindow.Id,
+				Description = maintenanceWindow.Description,
+				DeviceId = maintenanceWindow.DeviceId,
+				Start = maintenanceWindow.Start,
+				End = maintenanceWindow.End,
+				Type = maintenanceWindow.Type,
+				Impact = maintenanceWindow.Impact,
+			};
+		}
+
+		public IEnumerable<Device> GetDevices() => _devices;
+
+		public Device GetDevice(Guid id) => _devices.FirstOrDefault(d => d.Id == id);
+
+		// Adapter for IRepository (currently uses int)
+		Device DeviceMaintenanceApi.Data.IRepository.GetDevice(int id)
+		{
+			if (id <=0 || id > _devices.Count) return null;
+			return _devices[id -1];
+		}
+
+		public Device CreateDevice(Device device)
+		{
+			if (device.Id == Guid.Empty)
+			{
+				device.Id = Guid.NewGuid();
+			}
+			else
+			{
+				// If the device already exists, we can update it
+				var existing = GetDevice(device.Id);
+				if (existing != null)
+				{
+					throw new InvalidOperationException("Device with the same ID already exists.");
+				}
+			}
+
+			var deviceClone = CloneDevice(device);
+			_devices.Add(deviceClone);
+			return deviceClone;
+		}
+
+		public Device UpdateDevice(Device updated)
+		{
+			var existing = GetDevice(updated.Id);
+			if (existing == null)
+			{
+				return null;
+			}
+
+			existing.Name = updated.Name;
+			existing.Description = updated.Description;
+			return CloneDevice(existing);
+		}
+
+		public void DeleteDevice(Guid id)
+		{
+			var d = GetDevice(id);
+			if (d is null)
+			{
+				throw new InvalidOperationException("Device not found");
+			}
+
+			_devices.Remove(d);
+		}
+
+		// Adapter for IRepository (currently uses int)
+		void DeviceMaintenanceApi.Data.IRepository.DeleteDevice(int id)
+		{
+			var device = ((DeviceMaintenanceApi.Data.IRepository)this).GetDevice(id);
+			if (device is null)
+			{
+				throw new InvalidOperationException("Device not found");
+			}
+
+			DeleteDevice(device.Id);
+		}
+
+		public IEnumerable<MaintenanceWindow> GetMaintenanceByDevice(Guid deviceId)
+			=> _maintenanceWindows.Where(mw => mw.DeviceId == deviceId)
+							 .Select(CloneMaintenanceWindow);
+
+		public MaintenanceWindow GetMaintenance(Guid id)
+			=> _maintenanceWindows.Where(mw => mw.Id == id)
+							 .Select(CloneMaintenanceWindow)
+							 .FirstOrDefault();
+
+		public MaintenanceWindow CreateMaintenance(MaintenanceWindow maintenanceWindow)
+		{
+			if (maintenanceWindow == null) throw new ArgumentNullException(nameof(maintenanceWindow));
+
+			// Ensure the device exists
+			var device = GetDevice(maintenanceWindow.DeviceId);
+			if (device == null)
+			{
+				return null;
+			}
+
+			if (maintenanceWindow.Id == Guid.Empty)
+			{
+				maintenanceWindow.Id = Guid.NewGuid();
+			}
+			else
+			{
+				var existing = _maintenanceWindows.FirstOrDefault(mw => mw.Id == maintenanceWindow.Id);
+				if (existing != null)
+				{
+					throw new InvalidOperationException("Maintenance window with the same ID already exists.");
+				}
+			}
+
+			var mwClone = CloneMaintenanceWindow(maintenanceWindow);
+			_maintenanceWindows.Add(mwClone);
+			return CloneMaintenanceWindow(mwClone);
+		}
+
+		public MaintenanceWindow UpdateMaintenance(MaintenanceWindow updated)
+		{
+			if (updated == null) throw new ArgumentNullException(nameof(updated));
+
+			var existing = _maintenanceWindows.FirstOrDefault(mw => mw.Id == updated.Id);
+			if (existing == null)
+			{
+				return null;
+			}
+
+			// Ensure the target device exists
+			var device = GetDevice(updated.DeviceId);
+			if (device == null)
+			{
+				return null;
+			}
+
+			existing.DeviceId = updated.DeviceId;
+			existing.Start = updated.Start;
+			existing.End = updated.End;
+			existing.Description = updated.Description;
+			existing.Type = updated.Type;
+			existing.Impact = updated.Impact;
+
+			return CloneMaintenanceWindow(existing);
+		}
+
+		public void DeleteMaintenance(Guid id)
+		{
+			var mw = _maintenanceWindows.FirstOrDefault(x => x.Id == id);
+			if (mw is null)
+			{
+				throw new InvalidOperationException("Maintenance window not found");
+			}
+
+			_maintenanceWindows.Remove(mw);
+		}
+	}
+}
