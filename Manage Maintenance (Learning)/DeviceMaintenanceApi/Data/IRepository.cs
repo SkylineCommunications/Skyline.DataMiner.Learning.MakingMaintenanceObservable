@@ -8,13 +8,13 @@ namespace DeviceMaintenanceApi.Data
 	{
 		IEnumerable<Device> GetDevices();
 
-		Device GetDevice(int id);
+		Device GetDevice(Guid id);
 
 		Device CreateDevice(Device device);
 
 		Device UpdateDevice(Device device);
 
-		void DeleteDevice(int id);
+		void DeleteDevice(Guid id);
 
 		IEnumerable<MaintenanceWindow> GetMaintenanceByDevice(Guid deviceId);
 

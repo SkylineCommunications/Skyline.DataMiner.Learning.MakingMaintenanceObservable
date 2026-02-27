@@ -1,12 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <DMSScript options="272" xmlns="http://www.skyline.be/automation">
-	<Name>Manage Maintenance (Learning)</Name>
+	<Name>MakingMaintenanceObservable Package</Name>
 	<Description></Description>
 	<Type>Automation</Type>
-	<Author>peter@skyline</Author>
+	<Author>PVP</Author>
 	<CheckSets>FALSE</CheckSets>
-	<Folder>Learning</Folder>
-	<Interactivity>Always</Interactivity>
+	<Folder></Folder>
 
 	<Protocols>
 	</Protocols>
@@ -19,7 +18,7 @@
 
 	<Script>
 		<Exe id="1" type="csharp">
-			<Value><![CDATA[[Project:Manage Maintenance (Learning)_1]]]></Value>
+			<Value><![CDATA[[Project:MakingMaintenanceObservable Package]]]></Value>
 			<!--<Param type="debug">true</Param>-->
 			<Message></Message>
 		</Exe>

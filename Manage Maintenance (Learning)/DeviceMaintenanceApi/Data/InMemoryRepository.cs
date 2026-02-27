@@ -1,7 +1,6 @@
-using System;
-
 namespace DeviceMaintenanceApi.Data
 {
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using Models;
@@ -44,13 +43,6 @@ namespace DeviceMaintenanceApi.Data
 		public IEnumerable<Device> GetDevices() => _devices;
 
 		public Device GetDevice(Guid id) => _devices.FirstOrDefault(d => d.Id == id);
-
-		// Adapter for IRepository (currently uses int)
-		Device DeviceMaintenanceApi.Data.IRepository.GetDevice(int id)
-		{
-			if (id <=0 || id > _devices.Count) return null;
-			return _devices[id -1];
-		}
 
 		public Device CreateDevice(Device device)
 		{
@@ -95,18 +87,6 @@ namespace DeviceMaintenanceApi.Data
 			}
 
 			_devices.Remove(d);
-		}
-
-		// Adapter for IRepository (currently uses int)
-		void DeviceMaintenanceApi.Data.IRepository.DeleteDevice(int id)
-		{
-			var device = ((DeviceMaintenanceApi.Data.IRepository)this).GetDevice(id);
-			if (device is null)
-			{
-				throw new InvalidOperationException("Device not found");
-			}
-
-			DeleteDevice(device.Id);
 		}
 
 		public IEnumerable<MaintenanceWindow> GetMaintenanceByDevice(Guid deviceId)

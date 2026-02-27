@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manage Maintenance (Learning)", "Manage Maintenance (Learning)\Manage Maintenance (Learning).csproj", "{31FF4466-F43E-4AD6-B677-A69933200888}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{C9C59F39-461F-4D0C-B47E-CC8BEC664922}"
+	ProjectSection(SolutionItems) = preProject
+		Internal\Code Analysis\qaction-debug.ruleset = Internal\Code Analysis\qaction-debug.ruleset
+		Internal\Code Analysis\qaction-release.ruleset = Internal\Code Analysis\qaction-release.ruleset
+		Internal\Code Analysis\stylecop.json = Internal\Code Analysis\stylecop.json
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MakingMaintenanceObservable Package", "MakingMaintenanceObservable Package\MakingMaintenanceObservable Package.csproj", "{A1741704-2329-42AD-B35C-C6E54F38443C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31FF4466-F43E-4AD6-B677-A69933200888}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31FF4466-F43E-4AD6-B677-A69933200888}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31FF4466-F43E-4AD6-B677-A69933200888}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31FF4466-F43E-4AD6-B677-A69933200888}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1741704-2329-42AD-B35C-C6E54F38443C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1741704-2329-42AD-B35C-C6E54F38443C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1741704-2329-42AD-B35C-C6E54F38443C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1741704-2329-42AD-B35C-C6E54F38443C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C9C59F39-461F-4D0C-B47E-CC8BEC664922} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EA19796E-52DD-4CF7-AC73-3D493C8DE20D}
+	EndGlobalSection
+EndGlobal

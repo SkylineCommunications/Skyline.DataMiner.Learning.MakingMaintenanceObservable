@@ -1,3 +1,16 @@
+/*
+***********************************************
+*  Copyright (c), Skyline Communications NV.  *
+***********************************************
+
+Revision History:
+
+DATE		VERSION		AUTHOR			COMMENTS
+
+27-02-2026	1.0.0.1		PVP, Skyline	Initial version
+****************************************************************************
+*/
+
 namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenance
 {
 	using System;
