@@ -14,8 +14,12 @@ DATE		VERSION		AUTHOR			COMMENTS
 namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenance
 {
 	using System;
+
 	using DeviceMaintenanceApi.Data;
+	using DeviceMaintenanceApi.Models;
+
 	using Dialogs.MaintenanceOverview;
+
 	using Skyline.DataMiner.Automation;
 	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
@@ -25,6 +29,9 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 	/// </summary>
 	public class Script
 	{
+		private IEngine engine;
+		private InteractiveController controller;
+
 		/// <summary>
 		/// The script entry point.
 		/// </summary>
@@ -33,12 +40,17 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 		{
 			try
 			{
+				this.engine = engine;
+
 				// Controls the event loop and switch between dialogs
-				var controller = new InteractiveController(engine);
+				controller = new InteractiveController(engine);
 
 				// Create an instance of the dialog you wish to show.
 				var repository = new InMemoryRepository();
 				var maintenanceOverviewDialog = new MaintenanceOverviewDialog(engine);
+				maintenanceOverviewDialog.AddMaintenance += (sender, args) => AddMaintenanceWindow();
+				maintenanceOverviewDialog.EditMaintenance += (sender, maintenanceWindow) => EditMaintenanceWindow(maintenanceWindow);
+				maintenanceOverviewDialog.DeleteMaintenance += (sender, maintenanceWindow) => DeleteMaintenanceWindow(maintenanceWindow);
 				maintenanceOverviewDialog.Load(repository);
 
 				// Starts the event loop and shows the first dialog.
@@ -65,6 +77,27 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 				engine.Log(ex.ToString());
 				engine.ExitFail(ex.Message);
 			}
+		}
+
+		private void AddMaintenanceWindow()
+		{
+			engine.GenerateInformation("Add");
+
+			// TODO: show dialog to create MaintenanceWindow
+		}
+
+		private void EditMaintenanceWindow(MaintenanceWindow maintenanceWindow)
+		{
+			engine.GenerateInformation($"Edit {maintenanceWindow}");
+
+			// TODO: show dialog to edit MaintenanceWindow
+		}
+
+		private void DeleteMaintenanceWindow(MaintenanceWindow maintenanceWindow)
+		{
+			engine.GenerateInformation($"Delete {maintenanceWindow}");
+
+			// TODO: show dialog to delete MaintenanceWindow
 		}
 	}
 }

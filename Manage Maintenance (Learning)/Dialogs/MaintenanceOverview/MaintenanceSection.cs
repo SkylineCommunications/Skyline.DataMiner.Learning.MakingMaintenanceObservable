@@ -2,17 +2,13 @@
 {
 	using System;
 	using System.Text;
+
 	using DeviceMaintenanceApi.Models;
+
 	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
 	public class MaintenanceSection : Section
 	{
-		public MaintenanceWindow MaintenanceWindow { get; }
-
-		public event Action Edit;
-
-		public event Action Delete;
-
 		public MaintenanceSection(MaintenanceWindow maintenanceWindow)
 		{
 			MaintenanceWindow = maintenanceWindow;
@@ -27,12 +23,18 @@
 			AddWidget(new Label(description.ToString()) { Width = 250 }, 0, 3);
 
 			var editButton = new Button("Edit") { Width = 60 };
-			editButton.Pressed += (sender, args) => Edit?.Invoke();
+			editButton.Pressed += (sender, args) => Edit?.Invoke(this, MaintenanceWindow);
 			AddWidget(editButton, 0, 4);
 
 			var deleteButton = new Button("Delete") { Width = 60 };
-			deleteButton.Pressed += (sender, args) => Delete?.Invoke();
+			deleteButton.Pressed += (sender, args) => Delete?.Invoke(this, MaintenanceWindow);
 			AddWidget(deleteButton, 0, 5);
 		}
+
+		public event EventHandler<MaintenanceWindow> Edit;
+
+		public event EventHandler<MaintenanceWindow> Delete;
+
+		public MaintenanceWindow MaintenanceWindow { get; }
 	}
 }
