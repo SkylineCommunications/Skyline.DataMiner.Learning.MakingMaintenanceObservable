@@ -33,13 +33,13 @@ id: 6e4479b5-d114-471e-bcc4-747ad92a4405
 #   Max length: 100 characters.
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
-title: MakingMaintenanceObservable Package
+title: Making Scripts Interactive and Observable
 
 # [Optional]
 # General information about the Catalog item.
 #   Max length: 100,000 characters
 # Currently not shown in the Catalog UI but will be supported in the near future.
-short_description: This package provides a DataMiner solution for making maintenance observable.
+short_description: This package provides a DataMiner solution for the learning session 'Making Scripts Interactive and Observable'.
 
 # [Optional]
 # A valid URL that points to the source code.
@@ -61,7 +61,7 @@ documentation_url:
 #   The email and url are optional, and should be in valid email/URL formats.
 owners:
   - name: Peter Vanpoucke
-    email: peter.vanpoucke@skyline.be
+    email: 
     url: 
 
 # [Optional]
@@ -71,8 +71,8 @@ owners:
 #   Cannot contain newlines.
 #   Cannot contain leading or trailing whitespace characters.
 tags:
-  - 
-  - 
+  - Empower
+  - Empower 2026
 
 # [Optional]
 # The ID of the vendor.
