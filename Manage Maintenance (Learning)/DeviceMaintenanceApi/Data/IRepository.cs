@@ -16,7 +16,7 @@ namespace DeviceMaintenanceApi.Data
 
 		void DeleteDevice(Guid id);
 
-		IEnumerable<MaintenanceWindow> GetMaintenanceByDevice(Guid deviceId);
+		IEnumerable<MaintenanceWindow> GetMaintenancesByDevice(Guid deviceId);
 
 		MaintenanceWindow GetMaintenance(Guid id);
 

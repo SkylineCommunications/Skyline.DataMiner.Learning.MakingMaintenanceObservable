@@ -18,6 +18,11 @@ namespace DeviceMaintenanceApi.Data
 
 		public static Device CloneDevice(Device device)
 		{
+			if (device is null)
+			{
+				throw new ArgumentNullException(nameof(device));
+			}
+
 			return new Device
 			{
 				Id = device.Id,
@@ -28,6 +33,11 @@ namespace DeviceMaintenanceApi.Data
 
 		public static MaintenanceWindow CloneMaintenanceWindow(MaintenanceWindow maintenanceWindow)
 		{
+			if (maintenanceWindow == null)
+			{
+				throw new ArgumentNullException(nameof(maintenanceWindow));
+			}
+
 			return new MaintenanceWindow
 			{
 				Id = maintenanceWindow.Id,
@@ -42,7 +52,13 @@ namespace DeviceMaintenanceApi.Data
 
 		public IEnumerable<Device> GetDevices() => _devices;
 
-		public Device GetDevice(Guid id) => _devices.FirstOrDefault(d => d.Id == id);
+		private Device GetDevice(Guid id) => _devices.FirstOrDefault(d => d.Id == id);
+
+		Device IRepository.GetDevice(Guid id)
+		{
+			var device = GetDevice(id);
+			return device is null ? null : CloneDevice(device);
+		}
 
 		public Device CreateDevice(Device device)
 		{
@@ -89,14 +105,17 @@ namespace DeviceMaintenanceApi.Data
 			_devices.Remove(d);
 		}
 
-		public IEnumerable<MaintenanceWindow> GetMaintenanceByDevice(Guid deviceId)
-			=> _maintenanceWindows.Where(mw => mw.DeviceId == deviceId)
-							 .Select(CloneMaintenanceWindow);
+		public IEnumerable<MaintenanceWindow> GetMaintenancesByDevice(Guid deviceId)
+			=> _maintenanceWindows.Where(mw => mw.DeviceId == deviceId).Select(CloneMaintenanceWindow);
 
-		public MaintenanceWindow GetMaintenance(Guid id)
-			=> _maintenanceWindows.Where(mw => mw.Id == id)
-							 .Select(CloneMaintenanceWindow)
-							 .FirstOrDefault();
+		private MaintenanceWindow GetMaintenance(Guid id)
+			=> _maintenanceWindows.FirstOrDefault(mw => mw.Id == id);
+
+		MaintenanceWindow IRepository.GetMaintenance(Guid id)
+		{
+			var maintenance = GetMaintenance(id);
+			return maintenance is null ? null : CloneMaintenanceWindow(maintenance);
+		}
 
 		public MaintenanceWindow CreateMaintenance(MaintenanceWindow maintenanceWindow)
 		{
@@ -115,7 +134,7 @@ namespace DeviceMaintenanceApi.Data
 			}
 			else
 			{
-				var existing = _maintenanceWindows.FirstOrDefault(mw => mw.Id == maintenanceWindow.Id);
+				var existing = GetMaintenance(maintenanceWindow.Id);
 				if (existing != null)
 				{
 					throw new InvalidOperationException("Maintenance window with the same ID already exists.");
@@ -129,12 +148,15 @@ namespace DeviceMaintenanceApi.Data
 
 		public MaintenanceWindow UpdateMaintenance(MaintenanceWindow updated)
 		{
-			if (updated == null) throw new ArgumentNullException(nameof(updated));
-
-			var existing = _maintenanceWindows.FirstOrDefault(mw => mw.Id == updated.Id);
-			if (existing == null)
+			if (updated is null)
 			{
-				return null;
+				throw new ArgumentNullException(nameof(updated));
+			}
+
+			var existing = GetMaintenance(updated.Id);
+			if (existing is null)
+			{
+				throw new InvalidOperationException($"Maintenance window with ID {updated.Id} does not exist.");
 			}
 
 			// Ensure the target device exists
