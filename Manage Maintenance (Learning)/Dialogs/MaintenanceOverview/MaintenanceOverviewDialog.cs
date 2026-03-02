@@ -16,13 +16,18 @@
 		private readonly Label selectDeviceFirstLabel = new Label("Select a device first") { Width = 810 };
 
 		public MaintenanceOverviewDialog(IEngine engine) : base(engine)
-		{ }
+		{
+			Title = "Maintenance Overview";
+			maintenanceOverviewSection.AddMaintenance += (sender, args) => AddMaintenance?.Invoke(this, selectDeviceSection.SelectedDevice);
+			maintenanceOverviewSection.EditMaintenance += (sender, args) => EditMaintenance?.Invoke(this, (selectDeviceSection.SelectedDevice, args));
+			maintenanceOverviewSection.DeleteMaintenance += (sender, args) => DeleteMaintenance?.Invoke(this, (selectDeviceSection.SelectedDevice, args));
+		}
 
-		public event EventHandler AddMaintenance;
+		public event EventHandler<Device> AddMaintenance;
 
-		public event EventHandler<MaintenanceWindow> EditMaintenance;
+		public event EventHandler<(Device device, MaintenanceWindow maintenanceWindow)> EditMaintenance;
 
-		public event EventHandler<MaintenanceWindow> DeleteMaintenance;
+		public event EventHandler<(Device device, MaintenanceWindow maintenanceWindow)> DeleteMaintenance;
 
 		public void Load(IRepository repository)
 		{
@@ -32,9 +37,6 @@
 
 			// Subscribe to the events of the MaintenanceOverviewSection to know when the user wants to add, edit or delete a maintenance window
 			LoadDevice(repository);
-			maintenanceOverviewSection.AddMaintenance += (sender, args) => AddMaintenance?.Invoke(this, EventArgs.Empty);
-			maintenanceOverviewSection.EditMaintenance += (sender, args) => EditMaintenance?.Invoke(this, args);
-			maintenanceOverviewSection.DeleteMaintenance += (sender, args) => DeleteMaintenance?.Invoke(this, args);
 
 			// Add the sections to the dialog
 			BuildDialog();
@@ -66,7 +68,7 @@
 				return;
 			}
 
-			var windows = repository.GetMaintenanceByDevice(selectDeviceSection.SelectedDevice.Id).ToList();
+			var windows = repository.GetMaintenancesByDevice(selectDeviceSection.SelectedDevice.Id).ToList();
 
 			maintenanceOverviewSection.Load(windows);
 			BuildDialog();
