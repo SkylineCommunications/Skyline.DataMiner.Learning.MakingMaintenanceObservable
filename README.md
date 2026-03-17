@@ -2,6 +2,8 @@
 
 A hands-on learning project that demonstrates how to create interactive automation scripts in DataMiner using the Interactive Automation Script (IAS) Toolkit.
 
+Open [Guide.md](Guide.md) for detailed step-by-step instructions.
+
 ## Overview
 
 This project teaches you how to build interactive automation scripts that can be embedded in Low-Code Apps as components. Through a practical example of a maintenance window management system, you'll learn how to:
