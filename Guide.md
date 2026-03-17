@@ -9,7 +9,9 @@
    1. Be sure to select the `Manage Maintenance (Learning)` script project.
    1. Click *Project* > *Manage NuGet Packages*
    1. Verify that the [Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit) NuGet is selected.
+
       ![Toolkit NuGet In Script Project](image/Guide/ToolkitNuGetInVSProject.png)
+
       > **Keep in mind** to select the matching version of the NuGet. The version and the description of NuGet will tell which minimum DataMiner version is required.
 
 ## Publish the script
@@ -17,24 +19,33 @@
 1. Add your DaaS to DIS:
    1. *Extensions* > *DIS* > *Settings*
    1. In *DMA* tab *Add* your DaaS.
+
       ![Add DaaS to DIS](image/Guide/AddDaaSToDis.png)
+
    1. Select `MakingMaintenanceObservable Package.xml` the `MakingMaintenanceObservable Package` script project.
    1. Click the down arrow next to the *Publish* button, in the bar on top, to select your DaaS.
+
       ![Publish To DaaS](image/Guide/PublishToDaaS.png)
+
       Note: During your session this DMA should remain the selected one when clicking *Publish*.
 
 1. Open the *Manage maintenance windows (Hands-On)* app:
    1. In the app you will see a text mentioning that the component should be replaced with the 'Interactive Automation Script' component.
    1. Duplicate the app, using the option when clicking the *...* icon in the upper right corner.
+
       ![Duplicate packaged app](image/Guide/DuplicatePackagedLca.png)
+
    1. Rename the app, by selecting the name in the top bar, from *Manage maintenance windows (Hands-on) (1)* to *Manage maintenance windows*.
    1. Remove the text component.
    1. Hover over the blue bar with '+' on the left end to add an *Interactive Automation Script* component.
+
       ![Select the 'Interactive Automation Script' component](image/Guide/AddIasComponentToLca.png)
+
    1. Resize the *Interactive Automation Script* component so it fills the entire page.
    1. Select the component and in *Component* > *Settings* select the *Manage Maintenance (Learning)* script.
       The component requires a script that is defined as interactive.
       Since that is currently not the case for the script that was published, it will display an error stating the script should be interactive. Let's fix that.
+
       ![Maintenance script in LCA is not interactive](image/Guide/MaintenanceScriptInLcaNotInteractive.png)
 
 1. Update the script to be interactive:
@@ -67,12 +78,14 @@
         ```
 
    1. Click the *Publish* button, in the bar on top, to publish the script to your DaaS.
+
       ![Publish the `Manage Maintenance (Learning)` script To DaaS](image/Guide/PublishScriptToDaaS.png)
 
 1. Return to the app in your browser to configure the `Interactive Automation Script`.
    1. Refresh (<kbd>Ctrl</kbd> + <kbd>R</kbd> / <kbd>Cmd</kbd> + <kbd>R</kbd>) the app.
    1. Select the component and in *Component* > *Settings* select the *Manage Maintenance (Learning)* script.
    1. Publish the app, using the button in the left section in the top bar.
+
       ![Publish script](image/Guide/PublishAppIcon.png)
 
 1. In the app select an *Encoder A1*.
@@ -113,7 +126,9 @@ The goal is to:
 
   - Hook up the dialog to edit and add a maintenance window.
   - When deleting a maintenance window ask the user for confirmation, before deleting the maintenance window.
+
     ![Delete MaintenanceWindow dialog](image/Guide/DeleteMaintenanceWindowDialog.png)
+
   > To create, update and delete a maintenance window, use the corresponding methods exposed in *repository*. The *repository* represents our in-memory storage.
 
 ## The **MaintenanceDialog** class
@@ -122,13 +137,21 @@ In the `Manage Maintenance (Learning)` project, the start of the *MaintenanceDia
 
 - The class inherits from the `Dialog` class available in the `Skyline.DataMiner.Utils.InteractiveAutomationScript` namespace.
 - To display the two labels for the name and the description of the *device*, widgets **deviceNameLabel** and **deviceDescriptionLabel** are defined.
+
    ![Device labels](image/Guide/MaintenanceDialogInLcaParts/DeviceInfo.png)
+
 - Two calendar widgets, **startDateBox** and **endDateBox**, are defined to display the *start* and *end* time.
+
    ![Start and End time](image/Guide/MaintenanceDialogInLcaParts/StartAndEnd.png)
+
 - The textbox widget, **descriptionTextBox**, is defined for the *description*.
+
    ![Description](image/Guide/MaintenanceDialogInLcaParts/Description.png)
+
 - To select the *type* and *impact*, the widgets **typeDropDown** and **impactDropDown** have been defined. Those are of type *EnumDropDown* so they will automatically prefill the values of their enums as the options in the dropdown.
+
    ![Type and impact](image/Guide/MaintenanceDialogInLcaParts/TypeAndImpact.png)
+
 - The other widgets are not needed later when loading or saving the date, so they will be defined later on.
 
 > Note that in this dialog no widgets need to be repositioned. When that would be the case the dialog should be rebuild on every load. See `MaintenanceOverviewDialog.cs` for an example.
@@ -187,7 +210,9 @@ Let's start hooking up the dialog by first displaying the device information.
    - When the package has been uploaded and deployed, return to the *Manage Maintenance windows* app in your browser and **refresh** the app.
    - Select the first device.
    - When clicking the **Edit** button next to one of the maintenance windows you should see the following dialog:
+
      ![The app only displays the device info](image/Guide/MaintenanceDialogInLcaParts/OnlyDeviceLabels.png)
+
      You'll notice that you're not able to return to the main dialog, since there are no input components available. When you refresh the app, the script execution will abort and you'll return to then main dialog again.
 
 ### Load the maintenance windows data
@@ -257,7 +282,9 @@ Next up we want the maintenance window data to be displayed.
    - When the package has been uploaded and deployed, return to the *Manage Maintenance windows* app in your browser and **refresh** the app.
    - Select the first device.
    - When clicking the **Edit** button next to one of the maintenance windows you should see the following dialog:
+
      ![The app only displays the device info and the inputs](image/Guide/MaintenanceDialogInLcaParts/OnlyDeviceLabelsAndInputs.png)
+
      You'll notice again that you're not able to return to the main dialog, since there are no buttons available yet. Let's add those now.
 
 ### Store the updated information
@@ -342,12 +369,15 @@ Next up we want to store the maintenance window data that we have changed. Or ca
    - When the package has been uploaded and deployed, return to the *Manage Maintenance windows* app in your browser and **refresh** the app.
    - Select the first device.
    - When clicking the **Edit** button next to one of the maintenance windows you should see the following dialog:
+
      ![The app only displays the device info and the inputs](image/Guide/MaintenanceDialogInLcaParts/FullDialog.png)
+
      You should now be able to change the values and save them. Or, by clicking the cancel button, return to the main dialog.
 
 ## Delete a maintenance window
 
 When the delete button - next to a maintenance window - is clicked, we want to ask the user for confirmation before deleting the maintenance window.
+
 ![Delete MaintenanceWindow dialog](image/Guide/DeleteMaintenanceWindowDialog.png)
 
 1. In `ManageMaintenanceController.cs`, we'll now hook up the events when displaying the dialog. Look for the `EditMaintenanceWindow` method.
