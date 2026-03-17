@@ -1,16 +1,16 @@
 namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenance
 {
 	using System;
-
 	using DeviceMaintenanceApi.Data;
 	using DeviceMaintenanceApi.Models;
-
-	using Dialogs.MaintenanceOverview;
-	using Dialogs.Maintenance;
-
 	using Skyline.DataMiner.Automation;
+	using Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenance.Dialogs.Maintenance;
+	using Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenance.Dialogs.MaintenanceOverview;
 	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
+	/// <summary>
+	/// Controls the interactive flow for managing device maintenance windows.
+	/// </summary>
 	public class ManageMaintenanceController
 	{
 		private readonly InteractiveController controller;
@@ -18,6 +18,10 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 		private readonly MaintenanceOverviewDialog maintenanceOverviewDialog;
 		private readonly IRepository repository;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ManageMaintenanceController"/> class.
+		/// </summary>
+		/// <param name="engine">The DataMiner engine.</param>
 		public ManageMaintenanceController(IEngine engine)
 		{
 			this.engine = engine ?? throw new ArgumentNullException(nameof(engine));
@@ -35,6 +39,9 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 			maintenanceOverviewDialog.DeleteMaintenance += (sender, args) => DeleteMaintenanceWindow(args.device, args.maintenanceWindow);
 		}
 
+		/// <summary>
+		/// Shows the maintenance overview dialog to the user.
+		/// </summary>
 		public void ShowMaintenanceOverview()
 		{
 			maintenanceOverviewDialog.Load(repository);
@@ -43,15 +50,20 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 
 		private void AddMaintenanceWindow(Device device)
 		{
-			var maintenanceDialog = new MaintenanceDialog(engine);
-			maintenanceDialog.Load(device, null);
+			var maintenanceDialog = new MaintenanceDialog(engine) { Title = "Add Maintenance Window" };
+			var maintenanceWindow = new MaintenanceWindow
+			{
+				Id = Guid.NewGuid(),
+				DeviceId = device.Id,
+				Start = DateTime.Now.AddDays(1),
+				End = DateTime.Now.AddDays(1).AddHours(2),
+				Description = string.Empty,
+				Type = MaintenanceWindowType.Other,
+				Impact = MaintenanceWindowImpact.Normal,
+			};
+			maintenanceDialog.Load(device, maintenanceWindow);
 			maintenanceDialog.SaveMaintenance += (sender, args) =>
 			{
-				var maintenanceWindow = new MaintenanceWindow
-				{
-					Id = Guid.NewGuid(),
-					DeviceId = device.Id,
-				};
 				maintenanceDialog.Store(maintenanceWindow);
 				repository.CreateMaintenance(maintenanceWindow);
 				ShowMaintenanceOverview();
@@ -64,7 +76,7 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 
 		private void EditMaintenanceWindow(Device device, MaintenanceWindow maintenanceWindow)
 		{
-			var maintenanceDialog = new MaintenanceDialog(engine);
+			var maintenanceDialog = new MaintenanceDialog(engine) { Title = "Edit Maintenance Window" };
 			maintenanceDialog.Load(device, maintenanceWindow);
 			maintenanceDialog.SaveMaintenance += (sender, args) =>
 			{
