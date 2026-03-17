@@ -29,6 +29,7 @@ namespace Skyline.DataMiner.Learning.MakingMaintenanceObservable.ManageMaintenan
 		{
 			try
 			{
+				engine.Timeout = TimeSpan.FromHours(1.5);
 				var manageMaintenanceController = new ManageMaintenanceController(engine);
 				manageMaintenanceController.ShowMaintenanceOverview();
 			}

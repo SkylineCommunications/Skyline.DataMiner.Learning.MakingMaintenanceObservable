@@ -3,19 +3,30 @@ namespace DeviceMaintenanceApi.Data
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Models;
+	using DeviceMaintenanceApi.Models;
 
+	/// <summary>
+	/// Provides an in-memory implementation of the repository for managing devices and maintenance windows.
+	/// </summary>
 	public class InMemoryRepository : IRepository
 	{
-		private readonly List<Device> _devices;
-		private readonly List<MaintenanceWindow> _maintenanceWindows;
+		private readonly List<Device> devices;
+		private readonly List<MaintenanceWindow> maintenanceWindows;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="InMemoryRepository"/> class with demo seed data.
+		/// </summary>
 		public InMemoryRepository()
 		{
-			_devices = DemoSeedData.GetDevices();
-			_maintenanceWindows = DemoSeedData.GetMaintenanceWindows();
+			devices = DemoSeedData.GetDevices();
+			maintenanceWindows = DemoSeedData.GetMaintenanceWindows();
 		}
 
+		/// <summary>
+		/// Creates a deep copy of the specified device.
+		/// </summary>
+		/// <param name="device">The device to clone.</param>
+		/// <returns>A new device instance with the same property values.</returns>
 		public static Device CloneDevice(Device device)
 		{
 			if (device is null)
@@ -31,6 +42,11 @@ namespace DeviceMaintenanceApi.Data
 			};
 		}
 
+		/// <summary>
+		/// Creates a deep copy of the specified maintenance window.
+		/// </summary>
+		/// <param name="maintenanceWindow">The maintenance window to clone.</param>
+		/// <returns>A new maintenance window instance with the same property values.</returns>
 		public static MaintenanceWindow CloneMaintenanceWindow(MaintenanceWindow maintenanceWindow)
 		{
 			if (maintenanceWindow == null)
@@ -50,16 +66,10 @@ namespace DeviceMaintenanceApi.Data
 			};
 		}
 
-		public IEnumerable<Device> GetDevices() => _devices;
+		/// <inheritdoc />
+		public IEnumerable<Device> GetDevices() => devices;
 
-		private Device GetDevice(Guid id) => _devices.FirstOrDefault(d => d.Id == id);
-
-		Device IRepository.GetDevice(Guid id)
-		{
-			var device = GetDevice(id);
-			return device is null ? null : CloneDevice(device);
-		}
-
+		/// <inheritdoc />
 		public Device CreateDevice(Device device)
 		{
 			if (device.Id == Guid.Empty)
@@ -77,10 +87,11 @@ namespace DeviceMaintenanceApi.Data
 			}
 
 			var deviceClone = CloneDevice(device);
-			_devices.Add(deviceClone);
+			devices.Add(deviceClone);
 			return deviceClone;
 		}
 
+		/// <inheritdoc />
 		public Device UpdateDevice(Device updated)
 		{
 			var existing = GetDevice(updated.Id);
@@ -94,6 +105,7 @@ namespace DeviceMaintenanceApi.Data
 			return CloneDevice(existing);
 		}
 
+		/// <inheritdoc />
 		public void DeleteDevice(Guid id)
 		{
 			var d = GetDevice(id);
@@ -102,24 +114,20 @@ namespace DeviceMaintenanceApi.Data
 				throw new InvalidOperationException("Device not found");
 			}
 
-			_devices.Remove(d);
+			devices.Remove(d);
 		}
 
+		/// <inheritdoc />
 		public IEnumerable<MaintenanceWindow> GetMaintenancesByDevice(Guid deviceId)
-			=> _maintenanceWindows.Where(mw => mw.DeviceId == deviceId).Select(CloneMaintenanceWindow);
+			=> maintenanceWindows.Where(mw => mw.DeviceId == deviceId).Select(CloneMaintenanceWindow);
 
-		private MaintenanceWindow GetMaintenance(Guid id)
-			=> _maintenanceWindows.FirstOrDefault(mw => mw.Id == id);
-
-		MaintenanceWindow IRepository.GetMaintenance(Guid id)
-		{
-			var maintenance = GetMaintenance(id);
-			return maintenance is null ? null : CloneMaintenanceWindow(maintenance);
-		}
-
+		/// <inheritdoc />
 		public MaintenanceWindow CreateMaintenance(MaintenanceWindow maintenanceWindow)
 		{
-			if (maintenanceWindow == null) throw new ArgumentNullException(nameof(maintenanceWindow));
+			if (maintenanceWindow == null)
+			{
+				throw new ArgumentNullException(nameof(maintenanceWindow));
+			}
 
 			// Ensure the device exists
 			var device = GetDevice(maintenanceWindow.DeviceId);
@@ -141,11 +149,12 @@ namespace DeviceMaintenanceApi.Data
 				}
 			}
 
-			var mwClone = CloneMaintenanceWindow(maintenanceWindow);
-			_maintenanceWindows.Add(mwClone);
-			return CloneMaintenanceWindow(mwClone);
+			var cloneMaintenanceWindow = CloneMaintenanceWindow(maintenanceWindow);
+			maintenanceWindows.Add(cloneMaintenanceWindow);
+			return CloneMaintenanceWindow(cloneMaintenanceWindow);
 		}
 
+		/// <inheritdoc />
 		public MaintenanceWindow UpdateMaintenance(MaintenanceWindow updated)
 		{
 			if (updated is null)
@@ -176,15 +185,45 @@ namespace DeviceMaintenanceApi.Data
 			return CloneMaintenanceWindow(existing);
 		}
 
+		/// <inheritdoc />
 		public void DeleteMaintenance(Guid id)
 		{
-			var mw = _maintenanceWindows.FirstOrDefault(x => x.Id == id);
+			var mw = maintenanceWindows.FirstOrDefault(x => x.Id == id);
 			if (mw is null)
 			{
 				throw new InvalidOperationException("Maintenance window not found");
 			}
 
-			_maintenanceWindows.Remove(mw);
+			maintenanceWindows.Remove(mw);
 		}
+
+		/// <inheritdoc />
+		Device IRepository.GetDevice(Guid id)
+		{
+			var device = GetDevice(id);
+			return device is null ? null : CloneDevice(device);
+		}
+
+		/// <inheritdoc />
+		MaintenanceWindow IRepository.GetMaintenance(Guid id)
+		{
+			var maintenance = GetMaintenance(id);
+			return maintenance is null ? null : CloneMaintenanceWindow(maintenance);
+		}
+
+		/// <summary>
+		/// Gets the internal device reference by its identifier.
+		/// </summary>
+		/// <param name="id">The unique identifier of the device.</param>
+		/// <returns>The internal device reference, or null if not found.</returns>
+		private Device GetDevice(Guid id) => devices.FirstOrDefault(d => d.Id == id);
+
+		/// <summary>
+		/// Gets the internal maintenance window reference by its identifier.
+		/// </summary>
+		/// <param name="id">The unique identifier of the maintenance window.</param>
+		/// <returns>The internal maintenance window reference, or null if not found.</returns>
+		private MaintenanceWindow GetMaintenance(Guid id)
+			=> maintenanceWindows.FirstOrDefault(mw => mw.Id == id);
 	}
 }

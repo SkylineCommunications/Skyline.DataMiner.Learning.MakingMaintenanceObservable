@@ -7,21 +7,40 @@
 
 	using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
+	/// <summary>
+	/// Represents the section displaying all maintenance windows for a selected device.
+	/// </summary>
 	public class MaintenanceOverviewSection : Section
 	{
 		private Section header;
 
+		/// <summary>
+		/// Initializes a new instance of the <see cref="MaintenanceOverviewSection"/> class.
+		/// </summary>
 		public MaintenanceOverviewSection()
 		{
 			InitializeHeader();
 		}
 
+		/// <summary>
+		/// Occurs when the user clicks the Add button to create a new maintenance window.
+		/// </summary>
 		public event EventHandler AddMaintenance;
 
+		/// <summary>
+		/// Occurs when the user clicks the Edit button for a maintenance window.
+		/// </summary>
 		public event EventHandler<MaintenanceWindow> EditMaintenance;
 
+		/// <summary>
+		/// Occurs when the user clicks the Delete button for a maintenance window.
+		/// </summary>
 		public event EventHandler<MaintenanceWindow> DeleteMaintenance;
 
+		/// <summary>
+		/// Loads the section with the specified maintenance windows.
+		/// </summary>
+		/// <param name="maintenanceWindows">The collection of maintenance windows to display.</param>
 		public void Load(IReadOnlyCollection<MaintenanceWindow> maintenanceWindows)
 		{
 			Clear();

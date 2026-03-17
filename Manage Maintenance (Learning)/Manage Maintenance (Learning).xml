@@ -5,8 +5,7 @@
 	<Type>Automation</Type>
 	<Author>PVP</Author>
 	<CheckSets>FALSE</CheckSets>
-	<Folder></Folder>
-	<Interactivity>Always</Interactivity>
+	<Folder>Learning</Folder>
 
 	<Protocols>
 	</Protocols>
