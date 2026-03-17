@@ -89,10 +89,11 @@ To make a script interactive and embeddable in Low-Code Apps:
 ## Resources
 
 - **Guide**: [Guide.md](Guide.md) - Complete hands-on tutorial
-- **Documentation**: [DataMiner Docs - IAS Toolkit](https://docs.dataminer.services/develop/devguide/Automation/Howto/Getting_Started_with_the_IAS_Toolkit.html)
-- **NuGet Package**: [Interactive Automation Script Toolkit](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
-- **GitHub**: [IAS Toolkit Repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
 - **Catalog**: [Making Scripts Interactive and Observable](https://catalog.dataminer.services/details/6e4479b5-d114-471e-bcc4-747ad92a4405)
+- **IAS Toolkit**:
+  - **Documentation**: [DataMiner Docs - IAS Toolkit](https://docs.dataminer.services/develop/devguide/Automation/Howto/Getting_Started_with_the_IAS_Toolkit.html)
+  - **NuGet Package**: [Interactive Automation Script Toolkit](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
+  - **GitHub**: [IAS Toolkit Repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
 
 ## Learning Path
 

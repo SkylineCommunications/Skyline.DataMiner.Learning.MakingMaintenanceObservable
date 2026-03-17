@@ -10,10 +10,6 @@ This package contains a complete, working example of an interactive automation s
 
 You can deploy this package to immediately see and use the complete implementation, or follow the step-by-step tutorial in the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable) to build it yourself.
 
-## Contributing
-
-This is a learning resource maintained by Skyline Communications. For issues or suggestions, please refer to the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable).
-
 ## Overview
 
 The project teaches you how to build interactive automation scripts that can be embedded in Low-Code Apps as components. Through a practical example of a maintenance window management system, you'll learn how to:
@@ -33,11 +29,11 @@ A **Maintenance Window Management** application that allows users to:
 - Edit existing maintenance windows
 - Delete maintenance windows with confirmation dialogs
 
-![Maintenance Window Overview](Images/maintenance-overview.png)
+![Maintenance Window Overview](./Images/maintenance-overview.png)
 
 The application demonstrates real-world patterns for building interactive automation scripts that provide a seamless user experience within Low-Code Apps.
 
-![Interactive Maintenance Dialog](Images/maintenance-dialog.png)
+![Interactive Maintenance Dialog](./Images/maintenance-dialog.png)
 
 ## Prerequisites
 
@@ -63,7 +59,7 @@ The application demonstrates real-world patterns for building interactive automa
    - Open `Skyline.DataMiner.Learning.MakingMaintenanceObservable.sln` in Visual Studio
 
 4. **Follow the guide**
-   - See [Guide.md](Guide.md) for detailed step-by-step instructions
+   - See `Guide.md` for detailed step-by-step instructions
    - The guide walks you through implementing all features from scratch
 
 ## Key Concepts
@@ -85,18 +81,10 @@ To make a script interactive and embeddable in Low-Code Apps:
 2. Use the IAS Toolkit to build dialogs and handle user interactions
 3. Configure the script as an "Interactive Automation Script" component in Low-Code Apps
 
-## Resources
-
-- **Guide**: [Guide.md](Guide.md) - Complete hands-on tutorial
-- **Documentation**: [DataMiner Docs - IAS Toolkit](https://docs.dataminer.services/develop/devguide/Automation/Howto/Getting_Started_with_the_IAS_Toolkit.html)
-- **NuGet Package**: [Interactive Automation Script Toolkit](https://www.nuget.org/packages/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
-- **GitHub**: [IAS Toolkit Repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit)
-- **Catalog**: [Making Scripts Interactive and Observable](https://catalog.dataminer.services/details/6e4479b5-d114-471e-bcc4-747ad92a4405)
-
 ## Learning Path
 
 1. **Start with the hands-on branch** - Clone and checkout the `hands-on` branch for a guided learning experience
-2. **Follow the Guide** - Work through [Guide.md](Guide.md) step by step
+2. **Follow the Guide** - Work through [Guide.md](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable/blob/HEAD/Guide.md) step by step
 3. **Build incrementally** - Each section builds upon the previous one
 4. **Test frequently** - Publish to your DataMiner system and test in a Low-Code App
 5. **Compare with main** - Check the `main` branch to see the complete implementation
@@ -105,6 +93,10 @@ To make a script interactive and embeddable in Low-Code Apps:
 
 The data in this learning project is stored **in memory only**. When the script restarts, all changes are lost and the original demo data is restored. This is intentional for learning purposes - in a production scenario, you would persist data to a database, parameters, or other storage.
 
+## Contributing
+
+This is a learning resource maintained by Skyline Communications. For issues or suggestions, please refer to the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable).
+
 ## License
 
-This project is provided as a learning resource for the DataMiner community and is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is provided as a learning resource for the DataMiner community and is licensed under the MIT License - see the [LICENSE](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable/blob/HEAD/LICENSE) file for details.
