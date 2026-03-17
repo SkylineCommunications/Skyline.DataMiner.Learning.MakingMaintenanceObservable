@@ -120,7 +120,7 @@ The goal is to:
     - A label and a textbox component for the **description**.
     - A label and a dropdown component for the **type**.
     - A label and a dropdown component for the **impact**.
-  - A Save and a cancel button
+  - A save and a cancel button
 
 - In `ManageMaintenanceController.cs`
 
