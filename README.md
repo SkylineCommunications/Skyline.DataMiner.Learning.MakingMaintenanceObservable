@@ -1,22 +1,10 @@
 # Making Scripts Interactive and Observable
 
-This package contains a complete, working example of an interactive automation script that demonstrates how to create embedded script interfaces in DataMiner Low-Code Apps using the Interactive Automation Script (IAS) Toolkit.
-
-**What's included:**
-
-- A fully functional maintenance window management script
-- A Low-Code App demonstrating the Interactive Automation Script component
-- Ready-to-deploy implementation showcasing the IAS Toolkit
-
-You can deploy this package to immediately see and use the complete implementation, or follow the step-by-step tutorial in the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable) to build it yourself.
-
-## Contributing
-
-This is a learning resource maintained by Skyline Communications. For issues or suggestions, please refer to the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable).
+A hands-on learning project that demonstrates how to create interactive automation scripts in DataMiner using the Interactive Automation Script (IAS) Toolkit.
 
 ## Overview
 
-The project teaches you how to build interactive automation scripts that can be embedded in Low-Code Apps as components. Through a practical example of a maintenance window management system, you'll learn how to:
+This project teaches you how to build interactive automation scripts that can be embedded in Low-Code Apps as components. Through a practical example of a maintenance window management system, you'll learn how to:
 
 - Create interactive dialogs with various UI components (labels, buttons, calendars, dropdowns, text boxes)
 - Implement the Model-View-Presenter (MVP) pattern for automation scripts
@@ -33,11 +21,11 @@ A **Maintenance Window Management** application that allows users to:
 - Edit existing maintenance windows
 - Delete maintenance windows with confirmation dialogs
 
-![Maintenance Window Overview](Images/maintenance-overview.png)
+![Maintenance Window Overview](image/README/maintenance-overview.png)
 
 The application demonstrates real-world patterns for building interactive automation scripts that provide a seamless user experience within Low-Code Apps.
 
-![Interactive Maintenance Dialog](Images/maintenance-dialog.png)
+![Interactive Maintenance Dialog](image/README/maintenance-dialog.png)
 
 ## Prerequisites
 
@@ -65,6 +53,19 @@ The application demonstrates real-world patterns for building interactive automa
 4. **Follow the guide**
    - See [Guide.md](Guide.md) for detailed step-by-step instructions
    - The guide walks you through implementing all features from scratch
+
+## Project Structure
+
+- **Manage Maintenance (Learning)/** - The main automation script project
+  - `DeviceMaintenanceApi/` - In-memory data storage and models
+  - `Dialogs/` - Interactive dialog implementations
+    - `MaintenanceOverview/` - Main overview dialog
+    - `Maintenance/` - Add/edit maintenance window dialog
+  - `ManageMaintenanceController.cs` - Main controller coordinating dialogs
+
+- **MakingMaintenanceObservable Package/** - Catalog package configuration
+  - `PackageContent/` - Package resources and references
+  - `CatalogInformation/` - Catalog metadata and images
 
 ## Key Concepts
 
@@ -104,6 +105,10 @@ To make a script interactive and embeddable in Low-Code Apps:
 ## Note on Data Persistence
 
 The data in this learning project is stored **in memory only**. When the script restarts, all changes are lost and the original demo data is restored. This is intentional for learning purposes - in a production scenario, you would persist data to a database, parameters, or other storage.
+
+## Contributing
+
+This is a learning resource maintained by Skyline Communications. For issues or suggestions, please refer to the [GitHub repository](https://github.com/SkylineCommunications/Skyline.DataMiner.Learning.MakingMaintenanceObservable).
 
 ## License
 
