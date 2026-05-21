@@ -96,7 +96,7 @@ The project teaches you how to build interactive automation scripts that can be 
 
 ## Note on Data Persistence
 
-The data in this learning project is stored **in memory only**. When the script restarts, all changes are lost and the original demo data is restored. This is intentional for learning purposes. In a production scenario, you would persist data to a database, parameters, or other storage.
+The data in this learning project is stored **in memory only**. When the script restarts, all changes are lost and the original demo data is restored. This is intentional for learning purposes. In a production scenario, you would persist data using [DataMiner Object Models (DOM)](https://docs.dataminer.services/dataminer/Functions/DOM/tutorials/DOM_Getting_Started_With_DOM.html) or to other storage.
 
 ## Contributing
 
